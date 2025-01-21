@@ -29,18 +29,18 @@ def draw_rect():
         for y in range(0, HEIGHT, HEIGHT // 8):
             
             if ( x // WIDTH_UNITY ) % 2 == 0: 
-                print(x)
                 if ( y // HEIGHT_UNITY ) % 2 != 0:
-                    pygame.draw.rect(screen,(255, 255, 255),(x,y, WIDTH // 8, HEIGHT // 8))
+                    pygame.draw.rect(screen,(255, 255, 255),(x , y , WIDTH // 8, HEIGHT // 8))
                 else:
-                    pygame.draw.rect(screen,(0, 255, 0),(x,y, WIDTH // 8, HEIGHT // 8))
+                    pygame.draw.rect(screen,(170, 215, 200),(x , y, WIDTH // 8, HEIGHT // 8))
                     
             else:
                 if  ( y // HEIGHT_UNITY )  % 2 == 0:
-                      pygame.draw.rect(screen,(255, 255, 255),(x,y, WIDTH // 8, HEIGHT // 8))
+                    pygame.draw.rect(screen,(255, 255, 255),(x , y, WIDTH // 8, HEIGHT // 8))
                     
                 else:
-                     pygame.draw.rect(screen,(170, 215, 200),(x,y, WIDTH // 8, HEIGHT // 8))
+                    pygame.draw.rect(screen,(170, 215, 200), (x , y, WIDTH // 8, HEIGHT // 8))
+
 
 while runing:
     
