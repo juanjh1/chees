@@ -25,6 +25,7 @@ class Player():
         if self.side == Sides.BLACK:
             for pice in range(len(table[6])):
                 table[6][pice] =  Pown(self.side)
+                
             table[7][0]  = Rook(self.side)
             table[7][7]  = Rook(self.side)
             table[7][1]  = Knight(self.side)
