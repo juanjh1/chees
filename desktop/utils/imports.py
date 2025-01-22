@@ -14,3 +14,5 @@ LOGO = pygame.image.load(path_eng(absolute_path,"tower.png"))
 
 BANER = pygame.image.load(path_eng(absolute_path,"baner.svg"))
 
+BLIT =  pygame.image.load(path_eng(absolute_path,"blits.svg"))
+
