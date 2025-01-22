@@ -1,4 +1,4 @@
-from desktop.varibales import BoardStates , Sides
+from varibales import BoardStates , Sides
 import pygame
 
 class Board():

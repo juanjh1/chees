@@ -1,18 +1,19 @@
 import pygame
 import pygame.event
 from board import Cell
+import utils.imports as asets 
 
 
 pygame.init()
 
-WIDTH = 700
-HEIGHT = 500
+WIDTH = 820
+HEIGHT = 620
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 pygame.display.set_caption("Chees")
-logo = pygame.image.load("./img/util/tower.png")
-pygame.display.set_icon(logo)
+
+pygame.display.set_icon(asets.LOGO)
 
 WIDTH_UNITY = WIDTH // 8
 HEIGHT_UNITY = HEIGHT // 8
@@ -47,9 +48,10 @@ while runing:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             runing = False
-
-    draw_rect()
-    draw_lines()
+    #draw_rect()
+    #draw_lines()
+    screen.fill('#302E2B')
+    screen.blit(asets.BANER, (300,200))  
     pygame.display.flip() 
     
 

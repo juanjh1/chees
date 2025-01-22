@@ -1,11 +1,12 @@
-import Viu from "./node_modules/viu"
+import Vue from "vue"
 
 
-const aplication = Viu()
+const aplication = 
 
 
 
-const App = {
+new  Vue ( {
+    el: '#app',
     data(){
         return {
             mensaje: 'hola cara de monda'
@@ -17,6 +18,6 @@ const App = {
         return `<div> hola mi vida, {{mensaje}}</div>`
         
     }
-}
+})
 
-aplication.mount(App,'#app')
+
