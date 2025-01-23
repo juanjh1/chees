@@ -104,14 +104,14 @@ class Pown (Pice):
 
         if(self.side == Sides.WHITE):
             if(not self.moved ):
-                self.move = True
+                self.moved = True
                 return True if( _from[0]  == ( to[0] - 2 )  or   _from[0]  == ( to[0] - 1 ) ) and (_from[1] == to[1])  else False
-            elif(self.move): 
+            elif(self.moved): 
                 return True if  _from[0]  == ( to[0]- 1 )  and (_from[1] == to[1]) else False
         
         if(self.side == Sides.BLACK):
             if(not self.moved ):
-                self.move = True
+                self.moved = True
                 return True if _from[0]  == ( to[0] + 2 )  or   _from[0]  == ( to[0] + 1 ) and (_from[1] == to[1])  else False 
-            elif(self.move): 
+            elif(self.moved): 
                 return True if _from[0]  == ( to[0] + 1 ) and (_from[1] == to[1])  else False

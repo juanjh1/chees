@@ -34,6 +34,9 @@ def valuateInput(string):
 
 
 def displayBoard(table):
+    """
+    This is a deprecated table
+    """
     format_table= ""
     for line in table:
         table_line = "|"
