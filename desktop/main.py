@@ -2,6 +2,8 @@ import pygame
 import pygame.event
 from board import Cell
 import utils.imports as asets 
+from game import gameBoard
+from pices import Pice
 
 
 pygame.init()
@@ -26,19 +28,35 @@ def draw_lines():
         pygame.draw.line(screen, (0, 0, 0), (0, y), (WIDTH, y), width=1)
 
 def draw_rect():
+    font = pygame.font.Font(None, 40)
     for x in range(0, WIDTH, WIDTH_UNITY):
-        for y in range(0, HEIGHT, HEIGHT_UNITY): 
-            if ( x // WIDTH_UNITY ) % 2 == 0: 
-                
-                if ( y // HEIGHT_UNITY ) % 2 != 0:
-                    pygame.draw.rect(screen,('#EBECD0'), (x , y , WIDTH_UNITY, HEIGHT_UNITY))
+        for y in range(0, HEIGHT, HEIGHT_UNITY):
+            board_cell = pygame.Rect( x , y,  WIDTH_UNITY , HEIGHT_UNITY)
+            if 0 <= x // WIDTH_UNITY < len(gameBoard.get_board) and 0 <= y // HEIGHT_UNITY < len(gameBoard.get_board[0]):
+                print(x,y )
+                if ( x // WIDTH_UNITY ) % 2 == 0  and x < WIDTH: 
+
+                    if ( y // HEIGHT_UNITY ) % 2 != 0 and y < HEIGHT :
+                        pygame.draw.rect(screen,('#EBECD0'),  board_cell)
+                    else:
+                        pygame.draw.rect(screen,("#739552"),  board_cell)
+
                 else:
-                    pygame.draw.rect(screen,("#739552"), (x , y, WIDTH_UNITY, HEIGHT_UNITY))
+                    if  ( y // HEIGHT_UNITY )  % 2 == 0  and y < HEIGHT:
+                        pygame.draw.rect(screen,('#EBECD0'),  board_cell)
+                    else:
+                        pygame.draw.rect(screen,('#739552'),  board_cell)
+             
+                center_x, center_y =   board_cell.center
+                pice = gameBoard.get_board[y // HEIGHT_UNITY][  x // WIDTH_UNITY]
+                if isinstance(pice, Pice ):
+                    #text = font.render(str(gameBoard.get_board[ x // WIDTH_UNITY][ y // HEIGHT_UNITY].__repr__), True, 'white')
+                    img = pice.get_pice_img()
+
+                    img = pygame.transform.scale(img, (WIDTH_UNITY, HEIGHT_UNITY))
+                    screen.blit(img, (center_x - (img.width //2 ) ,  center_y - (img.height //2 ) ) )
             else:
-                if  ( y // HEIGHT_UNITY )  % 2 == 0:
-                    pygame.draw.rect(screen,('#EBECD0'), (x , y, WIDTH_UNITY, HEIGHT_UNITY))
-                else:
-                    pygame.draw.rect(screen,('#739552'), (x , y, WIDTH_UNITY, HEIGHT_UNITY))
+                continue
 
 font = pygame.font.Font(None, 40)
 while runing:

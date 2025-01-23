@@ -86,18 +86,18 @@ Gameturn = gameBoard.turn
 WITEPLAYER = createPlayer(Sides.WHITE, table)
 BLACKPLAYER = createPlayer(Sides.BLACK, table)
 
-
-while True:
-    print(displayBoard(table))
-
-    if Gameturn == Sides.WHITE:
-        #Muving white pice 
-        print("white turn")
-        movingPice(WITEPLAYER, Gameturn)
+if __name__ == '__main__':
+    while True:
         print(displayBoard(table))
-    if Gameturn == Sides.BLACK:
-        print("Black turn")
-        movingPice(BLACKPLAYER, Gameturn)
-        print(displayBoard(table)) 
-    Gameturn = change_turn(Gameturn)
+
+        if Gameturn == Sides.WHITE:
+            #Muving white pice 
+            print("white turn")
+            movingPice(WITEPLAYER, Gameturn)
+            print(displayBoard(table))
+        if Gameturn == Sides.BLACK:
+            print("Black turn")
+            movingPice(BLACKPLAYER, Gameturn)
+            print(displayBoard(table)) 
+        Gameturn = change_turn(Gameturn)
 

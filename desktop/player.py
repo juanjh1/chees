@@ -46,7 +46,6 @@ class Player():
                     table[to[0]][to[1]] = table[_from[0]][_from[1]] 
                     table[_from[0]][_from[1]] = BoardStates.VOID
                     self.historial_moves.append(((_from[0],_from[1]), (to[0],to[1])))
-                    
                     return True
 
         return False           

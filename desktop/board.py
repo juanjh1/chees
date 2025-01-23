@@ -6,6 +6,10 @@ class Board():
     def __init__(self):
         self.space = [[ BoardStates.VOID for j in range(8) ] for i in range(8)]
         self.turn = Sides.WHITE
+        
+    @property
+    def get_board(self):
+        return self.space
     
 
 

@@ -1,6 +1,8 @@
 from varibales import Sides
+import utils.imports  as images 
 
 class Pice():
+    
     def __init__(self, side):
         self.side = side
 
@@ -10,7 +12,8 @@ class Pice():
         return self.__class__.__name__
     def move(self, _from , to):
         pass
-
+    def get_pice_img (self):
+        pass
 
 
 
@@ -21,8 +24,11 @@ class King(Pice):
         super().__init__(side)
     def __repr__(self):
         return super().__repr__()
-
-
+    def get_pice_img (self):
+        if self.side == Sides.WHITE:
+            return images.KING_W
+        return images.KING_B
+    
 
 
 
@@ -32,6 +38,10 @@ class Queen (Pice):
         super().__init__(side)
     def __repr__(self):
         return super().__repr__()
+    def get_pice_img (self):
+        if self.side == Sides.WHITE:
+            return images.ROOK_W
+        return images.ROOK_B
 
 
 class Rook (Pice):
@@ -39,6 +49,10 @@ class Rook (Pice):
         super().__init__(side)
     def __repr__(self):
         return super().__repr__()
+    def get_pice_img (self):
+        if self.side == Sides.WHITE:
+            return images.ROOK_W
+        return images.ROOK_B
     
 
 
@@ -50,6 +64,10 @@ class Knight (Pice):
         super().__init__(side)
     def __repr__(self):
         return super().__repr__()
+    def get_pice_img (self):
+        if self.side == Sides.WHITE:
+            return images.KNIGHT_W
+        return images.KNIGHT_B
     
 
 
@@ -59,10 +77,14 @@ class Bishop(Pice):
         super().__init__(side)
     def __repr__(self):
         return super().__repr__()
-    
+    def get_pice_img (self):
+        if self.side == Sides.WHITE:
+            return images.BISHOP_W
+        return images.BISHOP_B
 
 
 class Pown (Pice):
+
     def __init__(self, side):
         super().__init__(side)
         self.moved = False
@@ -72,6 +94,11 @@ class Pown (Pice):
     
     def __repr__(self):
         return super().__repr__()
+    
+    def get_pice_img (self):
+        if self.side == Sides.WHITE:
+            return images.PAWN_W
+        return images.PAWN_B
     
     def move(self, _from , to):
 
