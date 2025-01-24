@@ -78,7 +78,7 @@ Este directorio contiene la interfaz de usuario del juego, desarrollada con Vue.
 
 ## Contribuidores
 
-- **Tu Nombre** - [Tu GitHub](https://github.com/juanjh1)
+- **Tu Nombre** - [Juan Diaz](https://github.com/juanjh1)
 
 
 ## Cómo Ejecutar el Proyecto
