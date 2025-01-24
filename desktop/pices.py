@@ -53,9 +53,20 @@ class Rook (Pice):
         if self.side == Sides.WHITE:
             return images.ROOK_W
         return images.ROOK_B
-    
-
-
+    def move(self, _from , to, table):
+        moves = []
+        
+        for  x in range(_from[0], len(table)):
+            moves.append((x, _from[1]))
+        for  y in range(_from[1], len(table)):
+            moves.append((_from[0],y ))
+        for x in range(_from[0], 0 , -1 ):
+            moves.append((x, _from[1]))
+        for  y in range(_from[1], 0 , -1):
+            moves.append((_from[0], y ))
+        if to in moves:
+            return True 
+        return False
 
 
 
@@ -103,7 +114,7 @@ class Pown (Pice):
     def move(self, _from , to):
 
         if(self.side == Sides.WHITE):
-            if(not self.moved ):
+            if(not self.moved):
                 self.moved = True
                 return True if( _from[0]  == ( to[0] - 2 )  or   _from[0]  == ( to[0] - 1 ) ) and (_from[1] == to[1])  else False
             elif(self.moved): 

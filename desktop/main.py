@@ -43,7 +43,7 @@ def draw_rect():
                 else:
                     color = '#739552' if (y // HEIGHT_UNITY) % 2 != 0 else '#EBECD0'
                 
-                draw_cell(board_cell, color)  # Llamada a la nueva función para dibujar la celda
+                draw_cell(board_cell, color) 
                 
                 center_x, center_y = board_cell.center
                 pice = gameBoard.get_board[y // HEIGHT_UNITY][x // WIDTH_UNITY]
