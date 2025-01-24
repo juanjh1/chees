@@ -4,39 +4,43 @@ Este proyecto es un juego de ajedrez desarrollado en Python y Vue.js. A continua
 
 ## Estructura del Proyecto
 
+# Project Structure
+
+```plaintext
 /project-root
 │
 ├── desktop
-│ ├── board.py
-│ ├── game.py
-│ ├── img
-│ │ ├── util
-│ │ │ ├── baner.svg
-│ │ │ └── blits.svg
-│ ├── main.py
-│ ├── pices.py
-│ ├── player.py
-│ └── utils
-│ └── imports.py
-│ └── varibales.py
+│   ├── board.py
+│   ├── game.py
+│   ├── img
+│   │   ├── util
+│   │   │   ├── baner.svg
+│   │   │   └── blits.svg
+│   ├── main.py
+│   ├── pices.py
+│   ├── player.py
+│   └── utils
+│       ├── imports.py
+│       └── variables.py
 │
 ├── backend
-│ ├── main.py
-│ └── models.py
+│   ├── main.py
+│   └── models.py
 │
-└── frontend
-├── .gitignore
-├── babel.config.js
-├── jsconfig.json
-├── package.json
-├── public
-│ └── index.html
-├── src
-│ ├── App.vue
-│ ├── components
-│ │ └── HelloWorld.vue
-│ └── main.js
+├── frontend
+│   ├── .gitignore
+│   ├── babel.config.js
+│   ├── jsconfig.json
+│   ├── package.json
+│   ├── public
+│   │   └── index.html
+│   └── src
+│       ├── App.vue
+│       ├── components
+│       │   └── HelloWorld.vue
+│       └── main.js
 └── vue.config.js
+```
 
 ## Descripción de Directorios
 
