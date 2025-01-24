@@ -41,7 +41,7 @@ class Player():
             print(table[to[0]][to[1]] , to[0],to[1])
             if table[to[0]][to[1]] ==  BoardStates.VOID and table[_from[0]][_from[1]].side == side:
                 print("here 1")
-                if table[_from[0]][_from[1]].move(_from, to):
+                if table[_from[0]][_from[1]].move(_from, to, table):
                     print("here 2")
                     table[to[0]][to[1]] = table[_from[0]][_from[1]] 
                     table[_from[0]][_from[1]] = BoardStates.VOID

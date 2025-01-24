@@ -25,7 +25,7 @@ def createPlayer(side, table):
 
 
 def valuateInput(string):
-    regex = r"^\((\d),(\d)\)"
+    regex = r"^\((\d+),(\d+)\)"
     to_match = re.findall(regex,string)
     return  to_match[0]
         
@@ -61,7 +61,7 @@ def displayBoard(table):
 
 
 
-def movingPice(player, gameturn):
+def movingPice(player, gameturn, table):
         _from = input("Side from: ")
         to = input("Side to: ")
         to_match = valuateInput(to)
@@ -96,11 +96,11 @@ if __name__ == '__main__':
         if Gameturn == Sides.WHITE:
             #Muving white pice 
             print("white turn")
-            movingPice(WITEPLAYER, Gameturn)
+            movingPice(WITEPLAYER, Gameturn, table)
             print(displayBoard(table))
         if Gameturn == Sides.BLACK:
             print("Black turn")
-            movingPice(BLACKPLAYER, Gameturn)
+            movingPice(BLACKPLAYER, Gameturn,table)
             print(displayBoard(table)) 
         Gameturn = change_turn(Gameturn)
 

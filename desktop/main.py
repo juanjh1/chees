@@ -38,10 +38,11 @@ def draw_rect():
         for y in range(0, HEIGHT, HEIGHT_UNITY):
             board_cell = pygame.Rect(x, y, WIDTH_UNITY, HEIGHT_UNITY)
             if 0 <= x // WIDTH_UNITY < len(gameBoard.get_board) and 0 <= y // HEIGHT_UNITY < len(gameBoard.get_board[0]):
+               
                 if (x // WIDTH_UNITY) % 2 == 0:
-                    color = '#EBECD0' if (y // HEIGHT_UNITY) % 2 != 0 else '#739552'
+                    color = Cell.BK_CLASSIC_COLOR() if ( y // HEIGHT_UNITY) % 2 != 0 else Cell.WT_CLASSIC_COLOR()
                 else:
-                    color = '#739552' if (y // HEIGHT_UNITY) % 2 != 0 else '#EBECD0'
+                    color =  Cell.WT_CLASSIC_COLOR() if ( y // HEIGHT_UNITY) % 2 != 0 else Cell.BK_CLASSIC_COLOR()
                 
                 draw_cell(board_cell, color) 
                 
@@ -50,7 +51,7 @@ def draw_rect():
                 if isinstance(pice, Pice):
                     img = pice.get_pice_img()
                     img = pygame.transform.scale(img, (WIDTH_UNITY, HEIGHT_UNITY))
-                    screen.blit(img, (center_x - (img.width // 2), center_y - (img.height // 2)))
+                    screen.blit(img, (center_x - ( img.width // 2 ), center_y - (img.height // 2)))
             else:
                 continue
 

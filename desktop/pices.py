@@ -55,7 +55,6 @@ class Rook (Pice):
         return images.ROOK_B
     def move(self, _from , to, table):
         moves = []
-        
         for  x in range(_from[0], len(table)):
             moves.append((x, _from[1]))
         for  y in range(_from[1], len(table)):
@@ -92,7 +91,8 @@ class Bishop(Pice):
         if self.side == Sides.WHITE:
             return images.BISHOP_W
         return images.BISHOP_B
-
+    def move(self, _from , to, table):
+        pass
 
 class Pown (Pice):
 
@@ -111,7 +111,7 @@ class Pown (Pice):
             return images.PAWN_W
         return images.PAWN_B
     
-    def move(self, _from , to):
+    def move(self, _from , to, table = None):
 
         if(self.side == Sides.WHITE):
             if(not self.moved):

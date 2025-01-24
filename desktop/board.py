@@ -15,9 +15,20 @@ class Board():
 
 
 class Cell():
+    bk_cell_classic = '#EBECD0'
+    wt_cell_classic = '#739552'
+    
     def __init__(self , side):
+
         self.surf = pygame.Surface
         if side == Sides.WHITE():
             self.surf.fill((220, 20, 60))
         if side == Sides.BLACK:
             self.surf.fill((0, 0, 0))
+    @staticmethod
+    def BK_CLASSIC_COLOR():
+        return  Cell.bk_cell_classic 
+    @staticmethod
+    def WT_CLASSIC_COLOR():
+        return  Cell.wt_cell_classic
+    
