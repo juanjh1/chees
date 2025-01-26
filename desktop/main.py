@@ -7,6 +7,7 @@ from pices import Pice
 from game import Sides, movingPice, displayBoard, change_turn, table, BLACKPLAYER, WITEPLAYER, Gameturn
 from threading import Thread
 import asyncio
+import varibales
 
 pygame.init()
 
@@ -38,7 +39,6 @@ def draw_rect():
         for y in range(0, HEIGHT, HEIGHT_UNITY):
             board_cell = pygame.Rect(x, y, WIDTH_UNITY, HEIGHT_UNITY)
             if 0 <= x // WIDTH_UNITY < len(gameBoard.get_board) and 0 <= y // HEIGHT_UNITY < len(gameBoard.get_board[0]):
-               
                 if (x // WIDTH_UNITY) % 2 == 0:
                     color = Cell.BK_CLASSIC_COLOR() if ( y // HEIGHT_UNITY) % 2 != 0 else Cell.WT_CLASSIC_COLOR()
                 else:
@@ -54,7 +54,7 @@ def draw_rect():
                     screen.blit(img, (center_x - ( img.width // 2 ), center_y - (img.height // 2)))
             else:
                 continue
-
+        
 font = pygame.font.Font(None, 40)
 
 
@@ -63,6 +63,13 @@ while runing:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 runing = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                clicked_col = mouse_pos[0] // WIDTH_UNITY
+                clicked_row = mouse_pos[1] // HEIGHT_UNITY
+                if table[clicked_row][clicked_col] is not  varibales.BoardStates.VOID:
+                    print(table[clicked_row][clicked_col].moves_factory((clicked_row, clicked_col), table))
+            
         #draw_rect()
     
         #draw_lines()
@@ -79,9 +86,5 @@ while runing:
         pygame.display.flip()
 
         
-      
-        
- 
-        
-  
+
 pygame.quit()
