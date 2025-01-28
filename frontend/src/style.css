@@ -10,14 +10,14 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
-	--white: rgba(255, 255, 255, 0.87);
-	--black: #242424;
+	--white: #fafafa;
+	--black: #141414;
 	--white-secondary: #bfbfbf;
 	--color-odd: #eed2aa;
 	--color-even: #90502f;
 	--color-frame: #62351f;
 	--cell-size: 42px;
-	--piece-size: 54px;
+	--piece-size: calc(var(--cell-size) - 20px);
 	--board-size: calc(var(--cell-size) * 8);
 
 	@media (min-width: 640px) {
@@ -39,9 +39,17 @@ body {
 	place-items: center;
 	min-width: 320px;
 	min-height: 100vh;
+	color: var(--white);
+	background-color: var(--black);
 }
 
 #app {
 	margin-left: auto;
 	margin-right: auto;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
 }
