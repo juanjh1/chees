@@ -17,6 +17,7 @@ class Board():
 class Cell():
     bk_cell_classic = '#EBECD0'
     wt_cell_classic = '#739552'
+    moves_circle ='#D3D3D380'
     
     def __init__(self , side):
 
@@ -31,4 +32,7 @@ class Cell():
     @staticmethod
     def WT_CLASSIC_COLOR():
         return  Cell.wt_cell_classic
+    @staticmethod
+    def HG_COLOR():
+        return  Cell.moves_circle
     

@@ -33,7 +33,10 @@ def draw_lines():
 def draw_cell(board_cell, color):
     pygame.draw.rect(screen, color, board_cell)
 
-def draw_rect():
+def draw_highlight(pos, color, radius):
+    pygame.draw.circle(screen, color, pos, radius)
+
+def draw_rect(gameBoard):
     font = pygame.font.Font(None, 40)
     for x in range(0, WIDTH, WIDTH_UNITY):
         for y in range(0, HEIGHT, HEIGHT_UNITY):
@@ -44,20 +47,23 @@ def draw_rect():
                 else:
                     color =  Cell.WT_CLASSIC_COLOR() if ( y // HEIGHT_UNITY) % 2 != 0 else Cell.BK_CLASSIC_COLOR()
                 
-                draw_cell(board_cell, color) 
-                
+                draw_cell(board_cell, color)                 
                 center_x, center_y = board_cell.center
                 pice = gameBoard.get_board[y // HEIGHT_UNITY][x // WIDTH_UNITY]
                 if isinstance(pice, Pice):
                     img = pice.get_pice_img()
                     img = pygame.transform.scale(img, (WIDTH_UNITY, HEIGHT_UNITY))
                     screen.blit(img, (center_x - ( img.width // 2 ), center_y - (img.height // 2)))
+                if  pice == varibales.BoardStates.HIGTHLIGTH:
+                    draw_highlight((center_x, center_y ), Cell.HG_COLOR(), (((HEIGHT_UNITY +WIDTH_UNITY)/2)*0.20 ))
             else:
                 continue
         
 font = pygame.font.Font(None, 40)
 
-
+table_state = varibales.TablesStates.DEFAULT
+hig_colector = None
+pice_slected_pos  = None
 while runing:
         
         for event in pygame.event.get():
@@ -68,7 +74,25 @@ while runing:
                 clicked_col = mouse_pos[0] // WIDTH_UNITY
                 clicked_row = mouse_pos[1] // HEIGHT_UNITY
                 if table[clicked_row][clicked_col] is not  varibales.BoardStates.VOID:
-                    print(table[clicked_row][clicked_col].moves_factory((clicked_row, clicked_col), table))
+                    if table_state != varibales.TablesStates.HIGTHLIGTH:
+                        hig_colector = table[clicked_row][clicked_col].moves_factory((clicked_row, clicked_col), table)
+                        for i in  hig_colector:
+                            table[i[0]][i[1]] = varibales.BoardStates.HIGTHLIGTH
+                            table_state = varibales.TablesStates.HIGTHLIGTH
+                            pice_slected_pos = (clicked_row, clicked_col)
+                    elif table[clicked_row][clicked_col] is   varibales.BoardStates.HIGTHLIGTH and table_state is varibales.TablesStates.HIGTHLIGTH:
+                        if (clicked_row,clicked_col) in hig_colector:
+                            table[clicked_row][clicked_col] = table[pice_slected_pos[0]][pice_slected_pos[1]]
+                            table[pice_slected_pos[0]][pice_slected_pos[1]] = varibales.BoardStates.VOID
+                            hig_colector = None
+                            pice_slected_pos = None
+                            displayBoard(table)
+                        pass
+                    elif table_state == varibales.TablesStates.HIGTHLIGTH: 
+                            for i in  hig_colector:
+                                table[i[0]][i[1]] = varibales.BoardStates.VOID
+                                hig_colector = None
+                                table_state = varibales.TablesStates.DEFAULT
             
         #draw_rect()
     
@@ -80,9 +104,10 @@ while runing:
         screen.blit(text,(( WIDTH // 2 )- (text.width // 2) , 50 ))
         screen.blit(asets.BLIT, ( button1.width , button1.height ))
         screen.blit(asets.BANER, (( WIDTH // 2 ) - ( asets.BANER.width // 2 ), 75 ))  
-
         """
-        draw_rect()
+        
+        draw_rect(gameBoard)
+       
         pygame.display.flip()
 
         

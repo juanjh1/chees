@@ -42,10 +42,10 @@ class Queen (Pice):
         return super().__repr__()
     def get_pice_img (self):
         if self.side == Sides.WHITE:
-            return images.ROOK_W
-        return images.ROOK_B
+            return images.QUEEN_W
+        return images.QUEEN_B
     
-    def moves_factory(self, _from , to, table):
+    def moves_factory(self, _from , table):
         moves = []
         x_start, y_start = _from  #(3,3)
         directions = [(1,1), (1,-1), (-1,1), (-1,-1)] 
@@ -129,7 +129,8 @@ class Knight (Pice):
         if self.side == Sides.WHITE:
             return images.KNIGHT_W
         return images.KNIGHT_B
-    
+    def moves_factory(self, _from ,  table):
+        pass
 
 
 
@@ -184,6 +185,20 @@ class Pown (Pice):
         if self.side == Sides.WHITE:
             return images.PAWN_W
         return images.PAWN_B
+    def moves_factory(self, _from, table):
+        if(self.side == Sides.WHITE):
+            if(not self.moved):
+                return [(_from[0] +  1 , _from[1] ), (_from[0]+  2, _from[1] )]
+            else: 
+                return [(_from[0] +  1 , _from[1] )]
+
+        if(self.side == Sides.BLACK):
+            if(not self.moved):
+                return [(_from[0] -  1 , _from[1]), (_from[0] -  2 , _from[1])]
+            else: 
+                return [(_from[0]-  1, _from[1]    )]
+
+        return super().moves_factory()
     
     def move(self, _from , to, table = None):
 
