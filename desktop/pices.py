@@ -1,6 +1,9 @@
 from varibales import Sides
 import utils.imports  as images 
 from varibales import BoardStates
+from utils.util_functions import generateMoventX, generateMoventY
+
+
 
 class Pice():
     
@@ -50,15 +53,10 @@ class Queen (Pice):
         x_start, y_start = _from  #(3,3)
         directions = [(1,1), (1,-1), (-1,1), (-1,-1)] 
         blocked = False
-        for  x in range(_from[0], len(table)):
-            moves.append((x, _from[1]))
-        for  y in range(_from[1], len(table)):
-            moves.append((_from[0],y ))
-        for x in range(_from[0], 0 , -1 ):
-            moves.append((x, _from[1]))
-        for  y in range(_from[1], 0 , -1):
-            moves.append((_from[0], y ))
-
+        generateMoventX(range(_from[0], len(table[0])), moves.append, _from[1], table, self)
+        generateMoventX(range(_from[0], 0 , -1 ), moves.append, _from[1], table, self)
+        generateMoventY(range(_from[1], len(table)), moves.append ,_from[0] , table , self)
+        generateMoventY(range(_from[1], 0 , -1), moves.append ,_from[0] , table , self )
         for dx, dy in directions:
             step = 0
             while not blocked:
@@ -71,8 +69,9 @@ class Queen (Pice):
                         moves.append((new_x, new_y))
                 else: 
                     if table[new_x][new_y].side != self.side:
-                        pass
-                    blocked = True  
+                        moves.append((new_x, new_y))
+                    else:
+                        blocked = True  
         return moves
     
     def move(self, _from , to, table):
@@ -89,30 +88,15 @@ class Rook (Pice):
         if self.side == Sides.WHITE:
             return images.ROOK_W
         return images.ROOK_B
-    def moves_factory(self,_from ,  table):
+    def moves_factory(self, _from ,  table):
         moves = []
-        for  x in range(_from[0], len(table)):
-            if table[x][_from[1]] is BoardStates.VOID:
-                    moves.append((x, _from[1]))
-            else: 
-                break
-        for  y in range(_from[1], len(table)):
-            if table[_from[0]][y] is BoardStates.VOID:
-                moves.append((_from[0],y ))
-            else: 
-                break
 
-        for x in range(_from[0], 0 , -1 ):
-            if table[x][_from[1]] is BoardStates.VOID:
-                moves.append((x, _from[1]))
-            else:
-                break
-        for  y in range(_from[1], 0 , -1):
-            if table[_from[0]][ y] is BoardStates.VOID:
-                moves.append((_from[0], y ))
-            else:
-                break
-        
+        generateMoventX(range(_from[0], len(table[0])), moves.append, _from[1], table, self)
+        generateMoventX(range(_from[0], 0 , -1 ), moves.append, _from[1], table, self)
+        generateMoventY(range(_from[1], len(table)), moves.append ,_from[0], table, self)
+        generateMoventY(range(_from[1], 0 , -1), moves.append ,_from[0] , table, self)
+
+        print(moves)
         return moves 
     def move(self, _from , to, table):
         moves = self.moves_factory( _from , to, table)   
@@ -145,7 +129,7 @@ class Bishop(Pice):
         return images.BISHOP_B
     def moves_factory(self, _from ,  table):
         moves = []  
-        x_start, y_start = _from  #(3,3)
+        x_start, y_start = _from  
         directions = [(1,1), (1,-1), (-1,1), (-1,-1)] 
         blocked = False
         for dx, dy in directions:
@@ -160,8 +144,9 @@ class Bishop(Pice):
                         moves.append((new_x, new_y))
                 else: 
                     if table[new_x][new_y].side != self.side:
-                        pass
-                    blocked = True  
+                        moves.append((new_x, new_y))
+                    else:
+                        blocked = True
         return moves                 
         
     def move(self, _from , to, table):
@@ -212,7 +197,7 @@ class Pown (Pice):
         if(self.side == Sides.BLACK):
             if(not self.moved ):
                 self.moved = True
-                return True if _from[0]  == ( to[0] + 2 )  or   _from[0]  == ( to[0] + 1 ) and (_from[1] == to[1])  else False 
+                return True if _from[0]  == ( to[0] + 2 )  or  _from[0]  == ( to[0] + 1 ) and (_from[1] == to[1])  else False 
             elif(self.moved): 
                 return True if _from[0]  == ( to[0] + 1 ) and (_from[1] == to[1])  else False
             
@@ -226,32 +211,38 @@ if __name__ == "__main__":
     # Posición inicial del alfil
     bishop = Bishop(side="white")
     _from = (3, 3)  # Posición central
-
+    
+    
     # ----------------------------------------------
     # Prueba 1: Movimiento diagonal ↘️ válido (4,4)
     # ----------------------------------------------
     to = (4, 4)
-    print(bishop.move(_from, to, table)) 
+    #print(bishop.move(_from, to, table)) 
 
     # ----------------------------------------------
     # Prueba 2: Movimiento diagonal ↖️ válido (2,2)
     # ----------------------------------------------
     to = (2, 2)
-    print(bishop.move(_from, to, table))  
+    #print(bishop.move(_from, to, table))  
     # ----------------------------------------------
     # Prueba 3: Movimiento diagonal ↙️ válido (4,2)
     # ----------------------------------------------
     to = (4, 2)
-    print(bishop.move(_from, to, table)) 
+    #(bishop.move(_from, to, table)) 
 
     # ----------------------------------------------
     # Prueba 4: Movimiento NO diagonal (3,5) → Inválido
     # ----------------------------------------------
     to = (3, 5)
-    print(bishop.move(_from, to, table))  
+    #print(bishop.move(_from, to, table))  
 
     # ----------------------------------------------
     # Prueba 5: Movimiento fuera del tablero (8,8)
     # ----------------------------------------------
     to = (8, 8)
-    print(bishop.move(_from, to, table))  
+    #print(bishop.move(_from, to, table))  
+
+    # Posición inicial de la torre
+    rook = Rook(side="white")
+    _from = (0, 1)  # Posición central
+    rook.moves_factory(_from,table ) 

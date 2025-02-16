@@ -46,7 +46,7 @@ def draw_rect(gameBoard):
                     color = Cell.BK_CLASSIC_COLOR() if ( y // HEIGHT_UNITY) % 2 != 0 else Cell.WT_CLASSIC_COLOR()
                 else:
                     color =  Cell.WT_CLASSIC_COLOR() if ( y // HEIGHT_UNITY) % 2 != 0 else Cell.BK_CLASSIC_COLOR()
-                
+
                 draw_cell(board_cell, color)                 
                 center_x, center_y = board_cell.center
                 pice = gameBoard.get_board[y // HEIGHT_UNITY][x // WIDTH_UNITY]
@@ -65,7 +65,7 @@ table_state = varibales.TablesStates.DEFAULT
 hig_colector = None
 pice_slected_pos  = None
 while runing:
-        
+        #do sth that matters                                                                       
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 runing = False
@@ -73,6 +73,7 @@ while runing:
                 mouse_pos = pygame.mouse.get_pos()
                 clicked_col = mouse_pos[0] // WIDTH_UNITY
                 clicked_row = mouse_pos[1] // HEIGHT_UNITY
+                
                 if table[clicked_row][clicked_col] is not  varibales.BoardStates.VOID:
                     if table_state != varibales.TablesStates.HIGTHLIGTH:
                         hig_colector = table[clicked_row][clicked_col].moves_factory((clicked_row, clicked_col), table)
@@ -84,9 +85,17 @@ while runing:
                         if (clicked_row,clicked_col) in hig_colector:
                             table[clicked_row][clicked_col] = table[pice_slected_pos[0]][pice_slected_pos[1]]
                             table[pice_slected_pos[0]][pice_slected_pos[1]] = varibales.BoardStates.VOID
-                            hig_colector = None
+                            print(hig_colector)
+                            for i in  hig_colector:
+                                print(i,table[i[0]][i[1]]  )
+                                if table[i[0]][i[1]] is  varibales.BoardStates.HIGTHLIGTH:
+                                    print("entre")
+                                    table[i[0]][i[1]] = varibales.BoardStates.VOID
+                                    hig_colector = None
+        
                             pice_slected_pos = None
-                            displayBoard(table)
+                            table_state = varibales.TablesStates.DEFAULT
+                            print(displayBoard(table))
                         pass
                     elif table_state == varibales.TablesStates.HIGTHLIGTH: 
                             for i in  hig_colector:
@@ -107,7 +116,6 @@ while runing:
         """
         
         draw_rect(gameBoard)
-       
         pygame.display.flip()
 
         
